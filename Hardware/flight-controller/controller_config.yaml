@@ -1,0 +1,130 @@
+# Flight-controller configuration for the ADE-001 reference quad.
+# Shared by the RTOS firmware build defaults and the HIL rig.
+# Units are SI unless a key is explicitly suffixed (e.g. *_deg, *_dps).
+# These values are starting points for the 1.20 kg ADE-001 airframe; the
+# tuning guide in controller_overview.md defines the validation order.
+
+flight_controller:
+  identity:
+    vehicle_class: quadrotor
+    motor_layout: quad_x          # M1 rear-right, M2 rear-left, M3 front-right, M4 front-left
+    airframe: ADE-FR-001          # see ../frame-design/ for geometry
+    mass_kg: 1.20
+    thrust_hover_fraction: 0.36   # hover thrust / max thrust, from power analysis
+
+  # ---- loop schedule (Hz); see controller_overview.md for the budget table
+  loops:
+    gyro_sampling_hz: 1000
+    rate_hz: 1000
+    attitude_hz: 500
+    velocity_hz: 250
+    position_hz: 50
+    ekf_hz: 250
+    dshot_hz: 1000
+    dshot_protocol: dshot600
+
+  # ---- cascaded PID gains (parallel form; torque commands are normalized)
+  pid:
+    rate:
+      # Derivative acts on measurement with a low-pass; integrator clamped.
+      roll:
+        kp: 1.2e-3
+        ki: 6.0e-6
+        kd: 8.0e-7
+        i_term_max: 0.25
+        d_lpf_hz: 100.0
+        feedforward: true
+      pitch:
+        kp: 1.2e-3
+        ki: 6.0e-6
+        kd: 8.0e-7
+        i_term_max: 0.25
+        d_lpf_hz: 100.0
+        feedforward: true
+      yaw:
+        kp: 1.5e-3
+        ki: 4.0e-6
+        kd: 0.0
+        i_term_max: 0.20
+        d_lpf_hz: 100.0
+        feedforward: false
+    attitude:
+      roll:
+        kp: 6.5                 # output is rate setpoint in rad/s
+        ki: 0.0
+        kd: 0.0
+      pitch:
+        kp: 6.5
+        ki: 0.0
+        kd: 0.0
+      yaw:
+        kp: 2.5
+        ki: 0.0
+        kd: 0.0
+    vertical:
+      velocity_pi:
+        kp: 0.55                # thrust fraction per (m/s)
+        ki: 0.18
+        i_term_max: 0.35
+    horizontal:
+      velocity:
+        kp: [2.4, 2.4]          # NED north, east; output m/s^2 command
+        ki: [0.3, 0.3]
+        i_term_max: [2.0, 2.0]
+      position:
+        kp: [1.1, 1.1]          # output velocity setpoint in m/s
+
+  # ---- sensing filters (input conditioning, ahead of the EKF)
+  filters:
+    gyro_lpf_hz: 90.0           # second-order, applied at sampling rate
+    gyro_notch_hz: 190.0        # blade-pass frequency of 8x4.5 props near hover
+    gyro_notch_q: 8.0
+    accel_lpf_hz: 50.0
+    baro_alt_lpf_hz: 10.0
+
+  # ---- estimator
+  ekf:
+    pos_noise_m: 0.35           # GNSS position 1-sigma
+    vel_noise_mps: 0.25         # GNSS velocity 1-sigma
+    gyro_bias_process: 1.0e-5   # rad/s^2 per sqrt(s)
+    accel_bias_process: 5.0e-3  # m/s^2 per sqrt(s)
+    baro_noise_m: 1.2
+    gps_gate_m: 3.0             # innovation gate for GNSS fusion
+    divergence_time_s: 1.0      # gates failing this long -> divergence
+
+  # ---- flight-envelope limits
+  limits:
+    max_tilt_deg: 30
+    max_climb_mps: 4.0
+    max_descent_mps: 3.0
+    max_yaw_rate_dps: 120
+    max_velocity_mps: 12.0
+    max_airspeed_mps: 15.0
+
+  # ---- mixer
+  mixer:
+    layout: quad_x              # matrix per controller_overview.md
+    output_min: 0.05            # idle thrust fraction (spin at stick zero)
+    output_max: 1.00
+    desaturation_priority: yaw  # preserve yaw authority when clipping
+
+  # ---- failsafe ladder: hold -> RTL -> land (all actions logged)
+  failsafes:
+    rc_loss_trigger_s: 0.5
+    rc_loss_hold_s: 3.0         # hold, then RTL
+    telemetry_loss_s: 10.0      # AUTO mode: warn, continue mission
+    battery:
+      warn_cell_v: 3.55         # load-compensated cell voltage
+      land_cell_v: 3.45
+      critical_cell_v: 3.30
+    geofence:
+      max_radius_m: 500
+      max_altitude_msl_m: 120   # check local regulations before flight
+      action: rtl
+    ekf_divergence: altctl_if_stable_else_land
+    esc_fault: land
+
+  # ---- flight modes exposed on RC switches
+  modes:
+    available: [manual, stabilize, altctl, posctl, auto]
+    default: stabilize
