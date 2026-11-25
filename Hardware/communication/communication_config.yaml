@@ -1,0 +1,30 @@
+# Telemetry link configuration; mirrors the defaults of TelemetryConfig in
+# communication/communication_interface.hpp. Units are SI.
+
+telemetry:
+  # Serial device node of the airside radio module. On the ADE-FC-001
+  # reference FC the radio occupies USART3.
+  device: /dev/ttyAMA3
+
+  # Serial baud rate between host and radio module [bps]. RF-side settings
+  # (frequency, air data rate, net ID, ECC) are programmed through the
+  # radio's AT command interface and stored in the module; this driver only
+  # owns the serial link. 57600 matches the reference radio profile.
+  baudrate: 57600
+
+  # MAVLink identity of this vehicle on the link.
+  system_id: 1
+  component_id: 1
+
+  # Verify frame checksums for the message types this driver knows
+  # (HEARTBEAT, RADIO_STATUS) and count failures. Keep true in flight.
+  verify_checksum: true
+
+  # MAVLink v2 signed frames (incompat flag bit0): dropped and counted
+  # until link signing is implemented at the protocol layer.
+  reject_signed_frames: true
+
+# Reference radio profile (stored in the radio module, listed here for
+# documentation): 900 MHz, net ID 25, air rate 64 kbps, ECC on, duty cycle
+# unlimited where regulations permit. RSSI conversion for RADIO_STATUS:
+# dBm = rssi/1.9 - 127.
