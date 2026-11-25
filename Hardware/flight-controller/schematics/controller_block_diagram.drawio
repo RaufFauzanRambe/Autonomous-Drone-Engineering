@@ -1,0 +1,124 @@
+<mxfile host="app.diagrams.net" agent="ADE" version="24.7.5">
+  <diagram id="ade-fc-blocks-1" name="Flight Controller Block Diagram">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="ADE-001 Flight-Controller Block Diagram&#10;Autonomous-Drone-Engineering - Rev A - 2026-11-25" style="text;html=1;align=left;verticalAlign=middle;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="640" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="imu" value="BMI088 IMU&#10;SPI1 @ 10 MHz&#10;gyro 1 kHz, accel 400 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="baro" value="BMP390 baro&#10;I2C1 @ 400 kHz&#10;50 Hz pressure" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="200" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="gnss" value="NEO-M9N GNSS&#10;USART1, UBX&#10;5 Hz pos/vel" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rc" value="RC receiver&#10;UART4, CRSF&#10;setpoints + mode" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="inamonitor" value="INA226 power monitor&#10;I2C1: V, I, SoC&#10;failsafe input" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="40" y="500" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="ekf" value="EKF&#10;24-state estimator&#10;250 Hz&#10;attitude, vel, pos, biases" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="280" y="180" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="failsafe" value="Failsafe supervisor&#10;battery levels, RC loss,&#10;geofence, EKF divergence&#10;hold - RTL - land ladder" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="280" y="420" width="170" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="mode" value="Mode logic&#10;manual / stabilize /&#10;altctl / posctl / auto&#10;50-250 Hz" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="280" y="580" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="posloop" value="Position loop&#10;50 Hz&#10;vel setpoints" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="530" y="90" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="velloop" value="Velocity loop&#10;250 Hz&#10;attitude + thrust cmd" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="530" y="200" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="attloop" value="Attitude loop&#10;500 Hz&#10;rate setpoints" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="530" y="310" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rateloop" value="Rate loop&#10;1 kHz&#10;torque commands" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="530" y="420" width="170" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="mixer" value="Mixer&#10;quad-X matrix&#10;desaturation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="530" y="530" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="dshot" value="DShot600 driver&#10;1 kHz, 4 channels" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="530" y="620" width="170" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="escmot" value="ESC + motors M1-M4" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="790" y="620" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="telemetry" value="Telemetry link&#10;MAVLink v2&#10;status + commands" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="790" y="300" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="logging" value="microSD logging&#10;@ 250 Hz state dump" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="790" y="400" width="180" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e-imu-ekf" value="filtered rates + accel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;fontSize=10" edge="1" parent="1" source="imu" target="ekf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-baro-ekf" value="altitude" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;fontSize=10" edge="1" parent="1" source="baro" target="ekf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-gnss-ekf" value="pos + vel" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;fontSize=10" edge="1" parent="1" source="gnss" target="ekf">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-rc-mode" value="pilot sticks + mode" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;fontSize=10" edge="1" parent="1" source="rc" target="mode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ina-failsafe" value="battery level" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;fontSize=10" edge="1" parent="1" source="inamonitor" target="failsafe">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-failsafe-mode" value="overrides" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;fontSize=10" edge="1" parent="1" source="failsafe" target="mode">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ekf-pos" value="position est." style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;fontSize=10;exitX=1;exitY=0.1;entryX=0;entryY=0.5" edge="1" parent="1" source="ekf" target="posloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ekf-vel" value="velocity + attitude est." style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="ekf" target="velloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ekf-att" value="attitude est." style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;fontSize=10;exitX=1;exitY=0.9;entryX=0;entryY=0.5" edge="1" parent="1" source="ekf" target="attloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ekf-rate" value="rate est." style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;fontSize=10;exitX=0.5;exitY=1;entryX=0;entryY=0.5" edge="1" parent="1" source="ekf" target="rateloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-imu-rate" value="raw gyro feedforward (1 kHz)" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;fontSize=10;exitX=1;exitY=0.25;entryX=0;entryY=0.25" edge="1" parent="1" source="imu" target="rateloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-pos-vel" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;fontSize=10;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="posloop" target="velloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-vel-att" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="velloop" target="attloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-att-rate" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d6b656;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="attloop" target="rateloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-mode-pos" value="mission setpoints" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;fontSize=10;exitX=1;exitY=0.2;entryX=0;entryY=0.5" edge="1" parent="1" source="mode" target="posloop">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-rate-mixer" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="rateloop" target="mixer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-mixer-dshot" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;strokeWidth=2;exitX=0.5;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="mixer" target="dshot">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-dshot-esc" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="dshot" target="escmot">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-fc-telemetry" value="state, health" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;fontSize=10;exitX=1;exitY=0.5;entryX=0;entryY=0.5" edge="1" parent="1" source="ekf" target="telemetry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e-ekf-logging" value="state dump" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#666666;fontSize=10;exitX=1;exitY=0.75;entryX=0;entryY=0.5" edge="1" parent="1" source="ekf" target="logging">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
