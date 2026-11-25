@@ -1,0 +1,48 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+dist/
+
+# --- C/C++ build artifacts ---
+build/
+cmake-build-*/
+compile_commands.json
+*.o
+*.a
+*.so
+*.d
+*.gch
+
+# --- Editors / IDE ---
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# --- CAD / EDA swap files ---
+*.bak
+*.bkp
+*.kicad_pcb-bak
+*.sch-bak
+*.fcstd1
+*.FCStd1
+
+# --- Flight logs and telemetry captures ---
+logs/
+*.log
+*.tlog
+*.ulg
+*.bin
+
+# --- OS ---
+.DS_Store
+Thumbs.db

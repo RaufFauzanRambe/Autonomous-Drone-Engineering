@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "autonomous-drone-engineering"
+version = "0.1.0"
+description = "Open-source hardware reference stack for an autonomous quadrotor: sensor drivers, flight-controller configuration, telemetry, power management, and frame design."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Autonomous-Drone-Engineering contributors" }]
+keywords = ["drone", "uav", "quadrotor", "flight-controller", "avionics", "sensors", "telemetry"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: POSIX :: Linux",
+    "Programming Language :: C++",
+    "Programming Language :: Python :: 3",
+    "Topic :: Scientific/Engineering",
+]
+dependencies = [
+    "pymavlink>=2.4",
+    "pyserial>=3.5",
+    "PyYAML>=6.0",
+    "numpy>=1.24",
+    "matplotlib>=3.7",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "black>=24.2",
+    "ruff>=0.4",
+    "mypy>=1.8",
+]
+
+[tool.setuptools]
+# The Python side is tooling-only at this stage: telemetry monitoring, config
+# validation, log analysis. Nothing is installed as an importable package yet,
+# so no packages are declared. The C++ drivers are built through CMakeLists.txt.
+packages = []
+
+[tool.black]
+line-length = 100
+target-version = ["py310"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B"]

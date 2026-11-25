@@ -1,0 +1,14 @@
+# Runtime dependencies for the Python-side tooling of
+# Autonomous-Drone-Engineering: telemetry monitoring, configuration
+# validation, and flight-log analysis during hardware bring-up.
+
+pymavlink>=2.4        # MAVLink protocol: telemetry decode, heartbeat, log parsing
+pyserial>=3.5         # Serial access to telemetry radios and GNSS receivers
+PyYAML>=6.0           # Loading and validating the subsystem YAML configs
+numpy>=1.24           # Log analysis math (filters, statistics)
+matplotlib>=3.7       # Plotting flight logs and power budgets
+
+# Development / CI tooling (mirrored in pyproject.toml [project.optional-dependencies])
+pytest>=8.0
+black>=24.2
+ruff>=0.4
