@@ -1,0 +1,40 @@
+# Battery pack and power-monitor configuration; mirrors the defaults of
+# BatteryConfig/MonitorConfig in power-management/power_monitor.hpp.
+# Units are SI.
+
+battery:
+  # Reference pack: 4S 3300 mAh 75C LiPo, 385 g.
+  cells: 4
+  capacity_mah: 3300.0
+
+  # Measured pack internal resistance including connectors [ohm].
+  # Fresh packs measure ~5-6 mOhm; replace the pack when it drifts above
+  # 12 mOhm (heat, sag, and the charge model all degrade).
+  internal_r_ohm: 0.008
+
+  # Per-cell voltage thresholds [V/cell], applied to the LOAD-COMPENSATED
+  # (open-circuit) cell voltage, so a full-throttle climb does not trigger
+  # false warnings. These must stay consistent with the failsafe entries in
+  # ../flight-controller/controller_config.yaml.
+  full_cell_v: 4.20
+  warn_cell_v: 3.55
+  land_cell_v: 3.45
+  critical_cell_v: 3.30
+  empty_cell_v: 3.20
+
+  # Fraction of nominal capacity treated as usable. 0.80 keeps cycle
+  # count healthy and leaves margin for the estimation error of the
+  # blend model; the endurance numbers in power_analysis.md use it.
+  usable_fraction: 0.80
+
+monitor:
+  # INA226 on the power distribution board, I2C bus 1, address 0x40
+  # (A0/A1 pins both grounded).
+  i2c_device: /dev/i2c-1
+  i2c_address: 0x40
+
+  # Shunt on the PDB: 0.5 mOhm (100 A / 50 mV class), sized so the pack's
+  # 56 A burst fits with margin and the 20 A hover dissipation stays
+  # below 0.2 W.
+  shunt_r_ohm: 0.0005
+  max_current_a: 100.0
