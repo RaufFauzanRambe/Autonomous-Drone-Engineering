@@ -1,0 +1,67 @@
+<mxfile host="app.diagrams.net" agent="ADE" version="24.7.5">
+  <diagram id="ade-wiring-1" name="Wiring Diagram">
+    <mxGraphModel dx="1400" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="826" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" value="ADE-001 Wiring Diagram&#10;Autonomous-Drone-Engineering - Rev A - 2026-11-25" style="text;html=1;align=left;verticalAlign=middle;fontSize=16;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="40" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="batt" value="Battery 4S 3300 mAh&#10;XT60 connector&#10;main leads + balance lead" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="40" y="100" width="180" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="pdb" value="PDB&#10;XT60 in, 8x ESC pads&#10;INA226: 0.5 mOhm shunt&#10;BEC 5 V/3 A onboard" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="320" y="90" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="esc" value="4-in-1 ESC&#10;8 AWG battery pads (soldered)&#10;JST-SH 10-pin signal + telemetry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="620" y="90" width="200" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="m13" value="Motors M1-M4&#10;3x 18 AWG per motor&#10;bullets or direct solder" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="920" y="90" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="fc" value="Flight Controller ADE-FC-001&#10;connectors (JST-GH unless noted):&#10;ESC: 10-pin JST-SH (DShot + tel)&#10;PWR: 3-pin (5 V, GND)&#10;I2C1: 4-pin (SDA, SCL)&#10;USART1: GNSS 6-pin&#10;USART3: radio 5-pin&#10;UART4: CRSF 3-pin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1" vertex="1" parent="1">
+          <mxGeometry x="620" y="300" width="230" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="gnss" value="GNSS NEO-M9N&#10;JST-GH 6-pin: 5 V, GND,&#10;TX, RX, SDA, SCL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="310" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="rcrx" value="RC Receiver (CRSF)&#10;JST-GH 3-pin: 5 V, GND, signal" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="300" y="410" width="190" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="radio" value="Telemetry radio 900 MHz&#10;JST-GH 5-pin: 5 V, GND,&#10;TX, RX, status" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="300" y="500" width="190" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="w-batt-pdb" value="12 AWG red (+) / black (-)&#10;XT60, 60 A continuous" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=3;fontSize=10;fontStyle=1" edge="1" parent="1" source="batt" target="pdb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-pdb-esc" value="10 AWG red/black, soldered pads&#10;56 A burst" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=3;fontSize=10;fontStyle=1" edge="1" parent="1" source="pdb" target="esc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-esc-mot" value="18 AWG black x3 per motor" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;strokeWidth=2;fontSize=10" edge="1" parent="1" source="esc" target="m13">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-fc-esc" value="28 AWG white (DShot x4)&#10;+ yellow (ESC telemetry)&#10;JST-SH 10-pin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;strokeWidth=2;fontSize=10;fontStyle=1;exitX=1;exitY=0.15;entryX=0.5;entryY=1" edge="1" parent="1" source="fc" target="esc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-pdb-fc" value="20 AWG orange (5 V) / black (GND)&#10;JST-GH 3-pin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#d79b00;strokeWidth=2;fontSize=10;fontStyle=1;exitX=0.5;exitY=1;entryX=0.25;entryY=0" edge="1" parent="1" source="fc" target="pdb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-pdb-fc-i2c" value="28 AWG white (SDA) / gray (SCL)&#10;JST-GH 4-pin, I2C1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;strokeWidth=1;fontSize=10;exitX=0.75;exitY=1;entryX=0.5;entryY=0" edge="1" parent="1" source="fc" target="pdb">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-fc-gnss" value="26 AWG: orange (5 V), black (GND),&#10;green (FC TX to RX), yellow (RX to FC TX)&#10;JST-GH 6-pin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;fontSize=10;fontStyle=1;exitX=0;exitY=0.15;entryX=1;entryY=0.5" edge="1" parent="1" source="fc" target="gnss">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-fc-rcrx" value="26 AWG: orange, black, white (CRSF)&#10;JST-GH 3-pin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;strokeWidth=2;fontSize=10;fontStyle=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5" edge="1" parent="1" source="fc" target="rcrx">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="w-fc-radio" value="26 AWG: orange (5 V), black (GND),&#10;green (FC TX), yellow (FC RX)&#10;JST-GH 5-pin" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#9673a6;strokeWidth=2;fontSize=10;fontStyle=1;exitX=0;exitY=0.85;entryX=1;entryY=0.5" edge="1" parent="1" source="fc" target="radio">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="notes" value="Wire color convention:&#10;red = battery +&#10;black = battery - / GND&#10;orange = regulated 5 V&#10;white = signal (I2C SDA)&#10;gray = I2C SCL&#10;green = FC TX to peripheral RX&#10;yellow = peripheral TX to FC RX&#10;&#10;Notes:&#10;- Twist every power pair; route motor phase wires away from GNSS and I2C.&#10;- Star ground at the PDB: no daisy-chained grounds.&#10;- XT60 is the rated bottleneck (60 A); never up-size fuses instead of wire." style="rounded=1;whiteSpace=wrap;html=1;align=left;verticalAlign=top;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;spacing=8" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="220" height="290" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
