@@ -1,0 +1,22 @@
+# u-blox NEO-M9N GNSS configuration; mirrors the defaults of GpsConfig in
+# sensors/gps/gps_interface.hpp. Units are SI.
+
+gps:
+  # Serial device node. On the ADE-FC-001 reference FC the GNSS receiver
+  # occupies USART1, exposed as /dev/ttyAMA1.
+  device: /dev/ttyAMA1
+
+  # Serial baud rate [bps]. The M9N ROM default is 38400; the ADE bench
+  # profile reconfigures the receiver to 115200 through u-center or the
+  # documented CFG-VALSET procedure (sensor_documentation.md, GNSS section).
+  # Set this to match whatever is stored in the receiver.
+  baudrate: 115200
+
+  # Publish 2D / dead-reckoning solutions with the invalid flag set, so the
+  # EKF can log degradation instead of seeing silence. Keep true unless you
+  # are debugging protocol framing.
+  publish_degraded: true
+
+  # Verify the UBX Fletcher-8 checksum and count failures. Never disable
+  # outside protocol debugging.
+  verify_checksum: true
