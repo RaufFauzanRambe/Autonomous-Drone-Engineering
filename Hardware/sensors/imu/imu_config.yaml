@@ -1,0 +1,34 @@
+# BMI088 IMU configuration; mirrors the defaults of ImuConfig in
+# sensors/imu/imu_interface.hpp. Units are SI.
+
+imu:
+  # SPI device nodes: the BMI088 is a dual-die part with one chip select per
+  # die. On the ADE-FC-001 reference FC the accelerometer hangs on CE0 and
+  # the gyroscope on CE1 of the same SPI controller.
+  accel_device: /dev/spidev0.0
+  gyro_device: /dev/spidev0.1
+
+  # SPI clock [Hz]. BMI088 maximum is 10 MHz; with short traces this is
+  # stable and keeps a 6-byte burst read under 7 us.
+  spi_speed_hz: 10000000
+
+  # Full-scale ranges. Wider accel range trades resolution for crash
+  # tolerance: 24 g keeps angular-rate estimation valid during aggressive
+  # maneuvers, while the EKF handles the extra quantization noise.
+  accel_range_g: 24        # allowed: 3, 6, 12, 24
+  gyro_range_dps: 2000     # allowed: 125, 250, 500, 1000, 2000
+
+  # Output data rates [Hz]. Gyro at 1000 Hz matches the rate-loop schedule;
+  # accel at 400 Hz is decimated into the 250 Hz EKF.
+  accel_odr_hz: 400        # allowed: 12.5 ... 1600 (power of 2 steps)
+  gyro_odr_hz: 1000        # allowed: 100, 200, 400, 1000, 2000
+
+  # First-order low-pass cutoffs on converted samples [Hz]. These are the
+  # driver-level conditioning filters; the notch filter and the EKF tuning
+  # live in ../flight-controller/controller_config.yaml.
+  gyro_lpf_hz: 80.0
+  accel_lpf_hz: 50.0
+
+  # Optional gyro bias file (three rad/s values, whitespace separated).
+  # Written by the bench calibration procedure; empty = start from zero.
+  calibration_file: ""
